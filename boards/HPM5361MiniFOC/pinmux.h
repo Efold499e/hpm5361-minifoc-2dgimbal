@@ -34,7 +34,7 @@ void init_dac_pins(DAC_Type *ptr);
 void init_led_pins_as_gpio(void);
 void init_led_pins_as_pwm(void);
 void init_plb_pins(void);
-void init_lin_pins(LINV2_Type *ptr);
+/* init_lin_pins removed: hpm_sdk v1.12.1 dropped LIN (LINV2) support for HPM5361 */
 void init_qeo_pins(QEO_Type *ptr);
 void init_sei_pins(SEI_Type *ptr, uint8_t sei_ctrl_idx);
 void init_rdc_pin(void);

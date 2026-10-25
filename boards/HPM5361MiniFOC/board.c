@@ -183,10 +183,6 @@ void board_init_clock(void)
     clock_add_to_group(clock_can2, 0);
     clock_add_to_group(clock_can3, 0);
     clock_add_to_group(clock_ptpc, 0);
-    clock_add_to_group(clock_lin0, 0);
-    clock_add_to_group(clock_lin1, 0);
-    clock_add_to_group(clock_lin2, 0);
-    clock_add_to_group(clock_lin3, 0);
     clock_add_to_group(clock_gptmr0, 0);
     clock_add_to_group(clock_gptmr1, 0);
     clock_add_to_group(clock_gptmr2, 0);
@@ -363,25 +359,7 @@ void board_init_spi_pins_with_gpio_as_cs(SPI_Type *ptr)
                                      GPIO_GET_PIN_INDEX(BOARD_SPI_CS_PIN), !BOARD_SPI_CS_ACTIVE_LEVEL);
 }
 
-void board_init_lin_pins(LINV2_Type *ptr)
-{
-    init_lin_pins(ptr);
-    //gpio_set_pin_output_with_initial(BOARD_12V_EN_GPIO_CTRL, BOARD_12V_EN_GPIO_INDEX, BOARD_12V_EN_GPIO_PIN, 1);    /* enable 12v output */
-}
-
-uint32_t board_init_lin_clock(LINV2_Type *ptr)
-{
-    if (ptr == HPM_LIN2) {
-        clock_add_to_group(clock_lin2, 0);
-        clock_set_source_divider(clock_lin2, clk_src_pll1_clk0, 40U); /* 20MHz */
-        return clock_get_frequency(clock_lin2);
-    } else if (ptr == HPM_LIN3) {
-        clock_add_to_group(clock_lin3, 0);
-        clock_set_source_divider(clock_lin3, clk_src_pll1_clk0, 40U); /* 20MHz */
-        return clock_get_frequency(clock_lin3);
-    }
-    return 0;
-}
+/* board_init_lin_pins/board_init_lin_clock removed: hpm_sdk v1.12.1 dropped LIN (LINV2) support for HPM5361 */
 
 void board_usb_vbus_ctrl(uint8_t usb_index, uint8_t level)
 {
@@ -542,7 +520,7 @@ void board_i2c_bus_clear(I2C_Type *ptr)
         SEGGER_RTT_printf(0, "I2C bus is ready\n");
         return;
     }
-    i2s_gen_reset_signal(ptr, 9);
+    i2c_gen_reset_signal(ptr, 9); /* upstream typo: i2s_gen_reset_signal */
     board_delay_ms(100);
     SEGGER_RTT_printf(0, "I2C bus is cleared\n");
 }

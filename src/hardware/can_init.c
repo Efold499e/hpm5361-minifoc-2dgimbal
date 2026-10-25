@@ -51,10 +51,10 @@ void board_canfd_isr(void)
     uint32_t flags = mcan_get_interrupt_flags(BOARD_APP_CAN_BASE);
 
     /* New message is available in RXFIFO0 */
-    if ((flags & MCAN_INT_RXFIFI0_NEW_MSG) != 0)
+    if ((flags & MCAN_INT_RXFIFO0_NEW_MSG) != 0) /* RXFIFI->RXFIFO rename in newer sdk */
     {
         mcan_read_rxfifo(BOARD_APP_CAN_BASE, 0, &s_can_rx_buf);
-        SEGGER_RTT_printf(0, "MCAN_INT_RXFIFI0_NEW_MSG %#x\n", s_can_rx_buf.std_id);
+        SEGGER_RTT_printf(0, "MCAN_INT_RXFIFO0_NEW_MSG %#x\n", s_can_rx_buf.std_id);
     }
 
     /* New message is available in RXFIFO1 */

@@ -147,6 +147,10 @@ extern "C" {
 
 /* ================ USB Device Port Configuration ================*/
 
+/* hpm_sdk v1.12.1 CherryUSB: bus instance counts */
+#define CONFIG_USBDEV_MAX_BUS USB_SOC_MAX_COUNT
+#define CONFIG_USBHOST_MAX_BUS USB_SOC_MAX_COUNT
+
 #ifndef CONFIG_HPM_USBD_BASE
 #define CONFIG_HPM_USBD_BASE    HPM_USB0_BASE
 #endif

@@ -112,7 +112,7 @@ static void mt6701_isr_callback(uint32_t isr_flag)
             if (!ep_tx_busy_flag)
             {
                 ep_tx_busy_flag = true;
-                usbd_ep_start_write(0x81, &vofa_data[BUF_NUM / 2], sizeof(just_float_data) * BUF_NUM / 2);
+                usbd_ep_start_write(0, 0x81, &vofa_data[BUF_NUM / 2], sizeof(just_float_data) * BUF_NUM / 2);
             }
         }
 
@@ -121,7 +121,7 @@ static void mt6701_isr_callback(uint32_t isr_flag)
             if (!ep_tx_busy_flag)
             {
                 ep_tx_busy_flag = true;
-                usbd_ep_start_write(0x81, &vofa_data[0], sizeof(just_float_data) * BUF_NUM / 2);
+                usbd_ep_start_write(0, 0x81, &vofa_data[0], sizeof(just_float_data) * BUF_NUM / 2);
             }
         }
         write_ptr = (write_ptr + 1) % BUF_NUM;

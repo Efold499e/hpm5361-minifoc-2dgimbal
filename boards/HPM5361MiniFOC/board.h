@@ -156,7 +156,7 @@
 
 /* MCAN section */
 #define BOARD_APP_CAN_BASE         HPM_MCAN0
-#define BOARD_APP_CAN_IRQn         IRQn_CAN0
+#define BOARD_APP_CAN_IRQn         IRQn_MCAN0
 
 /* CALLBACK TIMER section */
 #define BOARD_CALLBACK_TIMER (HPM_GPTMR3)
@@ -257,11 +257,7 @@
 #define BOARD_PLB_PWM_CHN                       (8U)
 #define BOARD_PLB_CHN    plb_chn0
 
-/* lin section */
-#define BOARD_LIN             HPM_LIN3
-#define BOARD_LIN_CLK_NAME    clock_lin3
-#define BOARD_LIN_IRQ         IRQn_LIN3
-#define BOARD_LIN_BAUDRATE    (19200U)
+/* lin section removed: hpm_sdk v1.12.1 dropped LIN (LINV2) support for HPM5361 */
 
 /* QEO */
 #define BOARD_QEO HPM_QEO0
@@ -273,7 +269,7 @@
 /* SEI */
 #define BOARD_SEI HPM_SEI
 #define BOARD_SEI_CTRL SEI_CTRL_0
-#define BOARD_SEI_IRQn IRQn_SEI0
+#define BOARD_SEI_IRQn IRQn_SEI0_0
 
 /* USB */
 #define BOARD_USB HPM_USB0
@@ -316,8 +312,6 @@ uint32_t board_init_can_clock(MCAN_Type *ptr);
 void board_init_rgb_pwm_pins(void);
 void board_write_spi_cs(uint32_t pin, uint8_t state);
 void board_init_spi_pins_with_gpio_as_cs(SPI_Type *ptr);
-void board_init_lin_pins(LINV2_Type *ptr);
-uint32_t board_init_lin_clock(LINV2_Type *ptr);
 
 void board_init(void);
 void board_init_usb_dp_dm_pins(void);

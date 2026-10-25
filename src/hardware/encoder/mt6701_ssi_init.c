@@ -19,7 +19,7 @@ static ecnoder_callback_t __isr_callback;
 int mt6701_ssi_init(uint32_t baud, sei_trigger_input_config_t *trigger_config)
 {
     /* [1] 传输配置 */
-    sei_tranceiver_config_t tranceiver_config = {0};
+    sei_transceiver_config_t tranceiver_config = {0};
     tranceiver_config.mode = sei_synchronous_master_mode; // 同步主机模式
     tranceiver_config.tri_sample = true;                  // 三重采样
     tranceiver_config.src_clk_freq = clock_get_frequency(clock_mot0);
@@ -28,7 +28,7 @@ int mt6701_ssi_init(uint32_t baud, sei_trigger_input_config_t *trigger_config)
     tranceiver_config.synchronous_master_config.clock_idle_high_z = false;
     tranceiver_config.synchronous_master_config.clock_idle_state = sei_idle_low_state;
     tranceiver_config.synchronous_master_config.baudrate = baud; // 波特率
-    sei_tranceiver_config_init(BOARD_SEI, BOARD_SEI_CTRL, &tranceiver_config);
+    sei_transceiver_config_init(BOARD_SEI, BOARD_SEI_CTRL, &tranceiver_config); /* renamed from sei_tranceiver_* in newer sdk */
     uint16_t ck0_point = sei_get_xcvr_ck0_point(BOARD_SEI, BOARD_SEI_CTRL);
     uint16_t ck1_point = sei_get_xcvr_ck1_point(BOARD_SEI, BOARD_SEI_CTRL);
     // 设置数据接收点时刻(设置为时钟下降沿)

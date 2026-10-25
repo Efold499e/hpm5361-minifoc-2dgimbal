@@ -1,0 +1,22 @@
+board:
+    name: 2dgimbal
+    soc: HPM5361
+    device: HPM5361xEGx
+    openocd-soc: hpm5361
+    openocd-probe: cmsis-dap
+    on-board-flash:
+      type: qspi-nor-flash
+      size: 1M
+    feature:
+      - pwm
+      - i2c
+      - uart
+      - usb-otg
+      - dmav2
+      - mcan
+      - ewdg
+      - gpiom
+      - tsns
+      - crc
+      - adc16
+      - plb

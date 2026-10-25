@@ -10,8 +10,8 @@ cmake_minimum_required(VERSION 3.13)
 # set(CONFIG_MOTORCTRL 1)
 set(CONFIG_HPM_ADC 1)
 set(CONFIG_CHERRYUSB 1)
-set(CONFIG_USB_DEVICE 1)
-set(CONFIG_USB_DEVICE_CDC 1)
+set(CONFIG_USB_DEVICE 1) # gates components/usb/device include dir (hpm_usb_device.h)
+set(CONFIG_USB_DEVICE_CDC_ACM 1) # was CONFIG_USB_DEVICE_CDC pre-v1.12 sdk
 set(CONFIG_EEPROM_EMULATION 1)
 
 set(CONFIG_SEGGER_RTT 1)
@@ -19,6 +19,7 @@ set(CONFIG_NDEBUG_CONSOLE 1)
 
 find_package(hpm-sdk REQUIRED HINTS $ENV{HPM_SDK_BASE})
 project(HPM5361MiniFOC)
+sdk_link_libraries(m) # sqrtf/fabsf in calibration code
 sdk_ses_compile_options(-mabi=ilp32f)
 sdk_ses_compile_options(-march=rv32imafc)
 sdk_ses_compile_options(-O3)

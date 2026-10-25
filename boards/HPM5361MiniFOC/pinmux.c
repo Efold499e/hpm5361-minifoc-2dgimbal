@@ -195,8 +195,8 @@ void init_can_pins(MCAN_Type *ptr)
 {
     if (ptr == HPM_MCAN0)
     {
-        HPM_IOC->PAD[IOC_PAD_PA00].FUNC_CTL = IOC_PA00_FUNC_CTL_CAN0_TXD;
-        HPM_IOC->PAD[IOC_PAD_PA01].FUNC_CTL = IOC_PA01_FUNC_CTL_CAN0_RXD;
+        HPM_IOC->PAD[IOC_PAD_PA00].FUNC_CTL = IOC_PA00_FUNC_CTL_MCAN0_TXD; /* CAN→MCAN rename in newer sdk */
+        HPM_IOC->PAD[IOC_PAD_PA01].FUNC_CTL = IOC_PA01_FUNC_CTL_MCAN0_RXD;
     }
 }
 
@@ -226,22 +226,8 @@ void init_dac_pins(DAC_Type *ptr)
     }
 }
 
-void init_lin_pins(LINV2_Type *ptr)
-{
-    /** enable open drain and pull up */
-    uint32_t pad_ctl = IOC_PAD_PAD_CTL_PE_SET(1) | IOC_PAD_PAD_CTL_PS_SET(1) | IOC_PAD_PAD_CTL_OD_SET(1);
-    if (ptr == HPM_LIN3)
-    {
-        HPM_IOC->PAD[IOC_PAD_PA13].FUNC_CTL = IOC_PA13_FUNC_CTL_LIN3_TREN;
-        HPM_IOC->PAD[IOC_PAD_PA13].PAD_CTL = pad_ctl;
-        HPM_IOC->PAD[IOC_PAD_PA14].FUNC_CTL = IOC_PA14_FUNC_CTL_LIN3_RXD;
-        HPM_IOC->PAD[IOC_PAD_PA14].PAD_CTL = pad_ctl;
-        HPM_IOC->PAD[IOC_PAD_PA15].FUNC_CTL = IOC_PA15_FUNC_CTL_LIN3_TXD;
-        HPM_IOC->PAD[IOC_PAD_PA15].PAD_CTL = pad_ctl;
-    }
-    /* Enable 12V */
-    HPM_IOC->PAD[IOC_PAD_PA24].FUNC_CTL = IOC_PA24_FUNC_CTL_GPIO_A_24;
-}
+/* init_lin_pins removed: hpm_sdk v1.12.1 dropped LIN (LINV2) support for HPM5361
+ * (it also held a dead "Enable 12V" PA24 pad-func write; board never called it) */
 
 void init_plb_pins(void)
 {
